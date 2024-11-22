@@ -80,8 +80,9 @@ def create_cvPerField(request):
 @api_view(["GET"])
 def get_cvFields(request, cv_id):
     try:
-        cpf = CvPerField.objects.filter(cv_id=cv_id)
-        serializer = cvPerFieldserializer(cpf, many=True)
+        cpf = CvPerField.objects.filter(cv_id=cv_id).values_list("field_id",flat=True)
+        fields=Fields.objects.filter(id__in=cpf)
+        serializer = fieldserializer(fields, many=True)
         return Response(serializer.data)
     except CvPerField.DoesNotExist:
         return Response("cpf does not exist")
@@ -89,15 +90,60 @@ def get_cvFields(request, cv_id):
         return Response(str(e))
 
 
-@api_view
+@api_view(["DELETE"])
 def delete_cvPerField(request):
     try:
         data = request.data
-        cpf = CvPerField.objects.get(field_id=data["field_id"])
+        cpf = CvPerField.objects.get(field_id=data["field_id"],cv_id=data["cv_id"])
         cpf.delete()
         return Response("cpf deleted")
     except CvPerField.DoesNotExist:
-        return Response("CvPerField des not exist")
+        return Response("CvPerField does not exist")
+    except Exception as e:
+        return Response(str(e))
+
+# CompanyCardPerField
+@api_view(["POST"])
+def create_ccpf(request):
+    try:
+        data = request.data
+        comanyCard = CompanyCard.objects.get(id=data["companyCard_id"])
+        field = Fields.objects.get(id=data["field_id"])
+        ccpf = CompanyCardPerField.objects.create(
+            companyCard_id=comanyCard,
+            field_id=field
+        )
+        serializer = companyCardPerFieldserializer(ccpf, many=False)
+        return Response(serializer.data)
+    except Fields.DoesNotExist:
+        return Response("Field does not exist")
+    except CompanyCard.DoesNotExist:
+        return Response("CompanyCard does not exist")
+    except Exception as e:
+        return Response(str(e))
+
+@api_view(["GET"])
+def get_companyCardFields(request,companyCard_id):
+    try:
+        data = request.data
+        ccpf = CompanyCardPerField.objects.filter(companyCard_id=companyCard_id).values_list("field_id",flat=True)
+        fields = Fields.objects.filter(id__in=ccpf)
+        serializer = fieldserializer(fields, many=True)
+        return Response(serializer.data)
+    except CompanyCard.DoesNotExist:
+        return Response("CompanyCard does not exist")
+    except Exception as e:
+        return Response(str(e))
+
+@api_view(["DELETE"])
+def delete_ccpf(request):
+    try:
+        data = request.data
+        ccpf = CompanyCardPerField.objects.get(id=data["ccpf_id"])
+        ccpf.delete()
+        return Response("deleted")
+    except CompanyCardPerField.DoesNotExist:
+        return Response("ccpf des not exist")
     except Exception as e:
         return Response(str(e))
 

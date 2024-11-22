@@ -11,3 +11,8 @@ class cvPerFieldserializer(serializers.ModelSerializer):
     class Meta:
         model = CvPerField
         fields = '__all__'
+
+class companyCardPerFieldserializer(serializers.ModelSerializer):
+    class Meta:
+        model = CompanyCardPerField
+        fields = '__all__'
