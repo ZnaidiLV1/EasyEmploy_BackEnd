@@ -44,7 +44,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;test&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/vegas/Desktop/django/EasyEmploy&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -121,7 +121,8 @@
       <workItem from="1732177234513" duration="1562000" />
       <workItem from="1732189377830" duration="476000" />
       <workItem from="1732210013069" duration="3918000" />
-      <workItem from="1732295822323" duration="442000" />
+      <workItem from="1732295822323" duration="2485000" />
+      <workItem from="1732611174827" duration="1954000" />
     </task>
     <servers />
   </component>

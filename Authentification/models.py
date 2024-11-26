@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin, AbstractUser, Group, \
     Permission
 from django.db import models
+from django.utils.crypto import get_random_string
 
 
 class CustomUserManager(BaseUserManager):
@@ -37,6 +38,11 @@ class CustomUser(AbstractUser):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+
+    def save(self, *args, **kwargs):
+        if not self.username:
+            self.username = get_random_string(8)  # Generate a random username
+        super().save(*args, **kwargs)
 
     objects = CustomUserManager()
 

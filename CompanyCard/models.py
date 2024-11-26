@@ -2,7 +2,6 @@ from django.db import models
 
 from Authentification.models import CustomUser
 
-
 class CompanyCard(models.Model):
     user_id=models.OneToOneField(CustomUser,on_delete=models.CASCADE)
     street=models.CharField()

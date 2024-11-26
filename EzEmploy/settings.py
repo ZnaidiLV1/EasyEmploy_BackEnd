@@ -27,7 +27,9 @@ SECRET_KEY = 'django-insecure-+qf@l%r$q!8h3rsc!y7n&lxo%y&k2_2-2h*f47rpa+0npc1$3t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1'
+]
 
 # Application definition
 
@@ -52,7 +54,6 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
-CORS_ALLOWED_ORIGINS=True
 
 ASGI_APPLICATION = 'EasyEmploy.asgi.application'
 
