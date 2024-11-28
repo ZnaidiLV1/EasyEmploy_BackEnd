@@ -22,6 +22,16 @@ def create_User(request):
         return Response("User created successfully")
     return Response({"errors is not valid": serializer.errors}, status=400)
 
+@api_view(['GET'])
+def get_user(request,email):
+    try:
+        user = CustomUser.objects.get(email=email)
+        serializer = UserSerializer(user, many=False)
+        return Response(serializer.data)
+    except CustomUser.DoesNotExist:
+        return Response("user does not exist")
+    except Exception as e:
+        return Response(str(e))
 @api_view(['POST'])
 def sendVerificationCode(request):
     if request.method == 'POST':

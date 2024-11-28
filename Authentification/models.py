@@ -3,6 +3,8 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.db import models
 from django.utils.crypto import get_random_string
 
+from Address.models import Address
+
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, username, password=None, **extra_fields):
@@ -27,6 +29,7 @@ class CustomUser(AbstractUser):
     verification_code = models.CharField(max_length=6, default='100000', editable=True)
     user_image = models.ImageField(upload_to="images/", blank=True, null=True)
     role = models.CharField(max_length=50, null=True, blank=True)
+    address=models.ForeignKey(Address,on_delete=models.CASCADE)
     # Client Fields
     first_name = models.CharField(max_length=50, null=True, blank=True)
     last_name = models.CharField(max_length=50, null=True, blank=True)

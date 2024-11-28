@@ -14,4 +14,5 @@ urlpatterns = [
     path('verifyCode/',verifyVerificationCode),
     # Reset Password
     path('reset_password/',resetPassword),
+    path('<str:email>-get_user/',get_user),
 ]
